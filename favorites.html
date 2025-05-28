@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное - Чайная номер один</title>
+    <link rel="icon" href="5 (1).png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Ruslan+Display&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            left: 30px;
+            top: 30px;
+            border: #FFFFFF;
+            background: #000000;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .back-button::before,
+        .back-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #FFF;
+        }
+
+        .back-button::before {
+            transform: rotate(45deg);
+            left: 12px;
+            top: 22px;
+        }
+
+        .back-button::after {
+            transform: rotate(-45deg);
+            left: 12px;
+            top: 22px;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .favorites-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .favorite-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        .favorite-image {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .favorite-info {
+            flex-grow: 1;
+        }
+
+        .favorite-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .favorite-description {
+            font-weight: 400;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .remove-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-size: 18px;
+            color: #777;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 600px) {
+            .favorite-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .favorite-image {
+                width: 100%;
+                height: 150px;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button" onclick="window.location.href='Index.html'"></div>
+    
+    <h1>Избранное</h1>
+    
+    <div class="favorites-list" id="favoritesList">
+        <!-- Товары будут добавляться сюда динамически -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoritesList = document.getElementById('favoritesList');
+            const favorites = JSON.parse(localStorage.getItem('teaFavorites')) || {};
+            
+            if (Object.keys(favorites).length === 0) {
+                favoritesList.innerHTML = '<p class="empty-message">Ваше избранное пусто</p>';
+                return;
+            }
+            
+            for (const key in favorites) {
+                const item = favorites[key];
+                
+                const favoriteItem = document.createElement('div');
+                favoriteItem.className = 'favorite-item';
+                
+                favoriteItem.innerHTML = `
+                    <div class="favorite-image" style="background-image: ${item.image}"></div>
+                    <div class="favorite-info">
+                        <div class="favorite-title">${item.title}</div>
+                        <div class="favorite-description">${item.description}</div>
+                    </div>
+                    <button class="remove-btn" data-title="${item.title}">Удалить</button>
+                `;
+                
+                favoritesList.appendChild(favoriteItem);
+            }
+            
+            // Обработчики для кнопок удаления
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const title = this.getAttribute('data-title');
+                    const favorites = JSON.parse(localStorage.getItem('teaFavorites')) || {};
+                    
+                    if (favorites[title]) {
+                        delete favorites[title];
+                        localStorage.setItem('teaFavorites', JSON.stringify(favorites));
+                        
+                        // Обновляем страницу
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

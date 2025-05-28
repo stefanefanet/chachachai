@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-size: 40px;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+header {
+    background-color: rgba(248, 245, 224, 0.67);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+	height: 15vh; /* Соотношение с футером */
+    position: relative;
+}
+
+/* Остальные стили остаются без изменений */
+.logo {
+    position: absolute;
+    left: 4.1%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5%; /* Сохраняем пропорциональную ширину */
+    aspect-ratio: 1/1; /* Делаем элемент квадратным */
+    background-color: #E7E3C9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 100;
+    color: #000000; /* Черный цвет текста */
+    font-size: 1.2vw;
+    text-transform: lowercase;
+    border: 1px solid #A3A39A; /* Обводка цвета #A3A39A */
+    padding: 0 10px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитываем границу в размерах */
+}
+
+@media (max-width: 768px) {
+    .logo {
+        position: static;
+        width: 15vh; /* Квадратная форма на мобильных */
+        height: 15vh;
+        aspect-ratio: 1/1;
+        margin-bottom: 2vh;
+        font-size: 3vh; /* Увеличиваем размер текста */
+        transform: none;
+    }
+}
+
+.header-nav {
+    display: flex;
+    gap: 4.5%; /* Примерно 65px/1440 ≈ 4.5% */
+    position: absolute;
+    left: 19%; /* 273/1440 ≈ 19% */
+    top: 8.1%; /* 83/1024 ≈ 8.1% */
+}
+
+.header-nav button {
+    background-color: rgba(233, 229, 199, 0.67);
+    border: none;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-size: 2.5vw;
+    padding: 0;
+    width: 18.3vw; /* 263px относительно 1440px */
+    height: 9.8vh; /* 100px относительно 1024px */
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: lowercase;
+}
+
+.header-nav button:hover {
+    background-color: #1B1818;
+    color: #FFFFFF;
+    outline: 1px solid #0B0B0B;
+}
+
+.header-nav button:nth-child(2) {
+    margin-left: 21.1%; /* 577-273=304; 304/1440≈21.1% */
+}
+
+.hero-section {
+    flex-grow: 1;
+    background-image: url('images/мудрецы.jpg');
+    background-size: cover;
+    background-position: 30% center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+footer {
+    background-color: #918E76;
+    color: white;
+    text-align: center;
+    padding: 2vh 0; /* Соотношение с высотой header */
+    margin-top: auto;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-size: 1.5vh;
+    height: 10vh; /* Фиксированная высота футера */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+footer p {
+    margin: 0.5vh 0;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 3vh 5vw;
+    }
+    
+    .logo {
+        position: static;
+        width: 80vw;
+        height: 15vh;
+        margin-bottom: 2vh;
+        font-size: 6vw;
+    }
+    
+    .header-nav {
+        position: static;
+        flex-direction: column;
+        width: 100%;
+        gap: 2vh;
+    }
+    
+    .header-nav button {
+        width: 100%;
+        height: 8vh;
+        font-size: 5vw;
+    }
+    
+    .header-nav button:nth-child(2) {
+        margin-left: 0;
+    }
+    
+    footer {
+        font-size: 2vw;
+        padding: 1.5vh 0;
+    }
+}/* Стили для страницы каталога */
+
+.catalog-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+.catalog-column {
+    position: absolute;
+    width: 16.666%;
+    height: 100%;
+    top: 0;
+    border: 1px solid #151313;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ruslan Display', sans-serif;
+    font-size: 3vw;
+    color: rgba(255, 0, 0, 0.9);
+    text-align: center;
+    border: 2px solid rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.column-1 { 
+    left: 0; 
+    background-image: url('images/chaban.jpg');
+}
+
+.column-2 { 
+    left: 16.666%; 
+    background-image: url('images/posuda.jpg');
+}
+
+.column-3 { 
+    left: 33.333%; 
+    background-image: url('images/chai.jpg');
+}
+
+.column-4 { 
+    left: 50%; 
+    background-image: url('images/music.jpg');
+}
+
+.column-5 { 
+    left: 66.666%; 
+    background-image: url('images/blagovonia.jpg');
+}
+
+.column-6 { 
+    left: 83.333%; 
+    background-image: url('images/books.jpg');
+}
+
+.catalog-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8); /* Затемняющий слой */
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+.catalog-column div {
+    position: relative;
+    z-index: 2;
+}
+.catalog-column:hover::before {
+    background: rgba(0, 0, 0, 0.1); /* Осветление при наведении */
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .catalog-column {
+        position: relative;
+        width: 100% !important;
+        height: 16.666vh;
+        left: 0 !important;
+        font-size: 5vw;
+    }
+    
+     .catalog-column div {
+        display: flex;
+        flex-direction: row; /* Буквы в строку (по умолчанию row, но можно явно указать) */
+        justify-content: center; /* Выравнивание по центру */
+        align-items: center; /* Центрирование по вертикали */
+        flex-wrap: nowrap; /* Запрет переноса на новую строку */
+    }
+
+    .catalog-column div br {
+        display: none; /* Удаляем <br>, чтобы текст не переносился */
+    }
+
+    .catalog-column:hover {
+        height: 25vh;
+    }
+}
+}
+	
+	.favorites-link {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	}
+
+	.favorites-link span {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+	}
+	.back-button {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    left: 30px;
+    top: 30px;
+    border: #FFFFFF;
+    background: #000000;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000; /* Увеличиваем z-index */
+    transition: all 0.3s ease;
+}
+
+.back-button::before,
+.back-button::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: #FFF;
+}
+
+.back-button::before {
+    transform: rotate(45deg);
+    left: 12px;
+    top: 22px;
+}
+
+.back-button::after {
+    transform: rotate(-45deg);
+    left: 12px;
+    top: 22px;
+}
+
+.back-button:hover {
+    transform: scale(1.1);
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .back-button {
+        position: fixed; /* Фиксированная позиция */
+        width: 50px; /* Немного увеличиваем размер */
+        height: 50px;
+        left: 15px;
+        top: 15px;
+        background: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+    }
+
+    .back-button::before,
+    .back-button::after {
+        width: 25px; /* Увеличиваем стрелки */
+        height: 3px;
+        left: 12px;
+        top: 24px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .back-button {
+        width: 45px;
+        height: 45px;
+        left: 10px;
+        top: 10px;
+    }
+
+	
+        

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чайная номер один. Гайвань</title>
+	<link rel="icon" href="5 (1).png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Ruslan+Display&family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F8F5E0;
+            overflow-y: hidden;
+        }
+
+        .container {
+            position: relative;
+            min-width: 1440px;
+            height: 1024px;
+        }
+
+        .scroll-container {
+            position: fixed;
+            width: 100%;
+            height: calc(100vh - 250px);
+            top: 250px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+
+        .card-container {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            margin: 17px 25px;
+            border-radius: 5px;
+            vertical-align: top;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-variant {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            left: 20px;
+            top: 20px;
+            overflow: hidden;
+        }
+
+        .image-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: filter 0.3s ease;
+        }
+		
+		.card-container:hover .image-content {
+            filter: brightness(0.5)
+			
+        }
+
+        .card-info {
+            position: absolute;
+            left: 9%;
+            right: 9%;
+            top: 50%;
+            bottom: 13%;
+            font-family: 'Inter';
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 35px;
+            color: #FFFFFF;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card-container:hover .card-info {
+            opacity: 1;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            left: 9%;
+            right: 53%;
+            top: 79%;
+            bottom: 3%;
+            background: rgba(233, 229, 199, 0.67);
+            border-radius: 80px;
+            font-family: 'Inter';
+            font-weight: 100;
+            font-size: 15px;
+            line-height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #000;
+            border: none;
+        }
+
+        .favorite-btn.active {
+            background: #000;
+            color: #fff;
+        }
+
+        .title {
+            position: fixed;
+            width: 1057px;
+            height: 226px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            font-family: 'Ruslan Display', cursive;
+            font-size: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            background: #F8F5E0;
+            z-index: 100;
+        }
+            
+        .back-button {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            left: 30px;
+            top: 30px;
+            border: #FFFFFF;
+            background: #000000;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .back-button::before,
+        .back-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #F8F5E0;
+        }
+
+        .back-button::before {
+            transform: rotate(45deg);
+            left: 12px;
+            top: 22px;
+        }
+
+        .back-button::after {
+            transform: rotate(-45deg);
+            left: 12px;
+            top: 22px;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="back-button" onclick="window.location.href='posuda 3.html'"></div>
+    <div class="favorite-counter" id="favoriteCounter">0</div>
+    <div class="container">
+        <div class="title">ГАЙВАНЬ</div>
+
+        <div class="scroll-container">
+            <!-- Карточки -->
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/11.jpg');"></div>
+                </div>
+                <div class="card-info">Жу Яо <br>керамика, 150 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+
+            <!-- Остальные карточки по аналогии -->
+            <!-- Карточка 2 -->
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/15.jpg');"></div>
+                </div>
+                <div class="card-info">Покой <br>фарфор, 100 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/16.jpg');"></div>
+                </div>
+                <div class="card-info">Тишина <br>фарфор, 180 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/17.jpg');"></div>
+                </div>
+                <div class="card-info">Рыбак <br>фарфор, 200 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+            
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/18.jpg');"></div>
+                </div>
+                <div class="card-info">Классика <br>фарфор, 160 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+            
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/19.jpg');"></div>
+                </div>
+                <div class="card-info">Традиция <br>керамика, 130 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+            
+            <div class="card-container">
+                <div class="image-variant">
+                    <div class="image-content" style="background-image: url('images/20.jpg');"></div>
+                </div>
+                <div class="card-info">Бамбуковая роща <br>фарфор, 180 мл</div>
+                <button class="favorite-btn">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Функция для сохранения избранного в LocalStorage
+    function saveFavorites(favorites) {
+        localStorage.setItem('teaFavorites', JSON.stringify(favorites));
+    }
+
+    // Функция для загрузки избранного из LocalStorage
+    function loadFavorites() {
+        const favorites = localStorage.getItem('teaFavorites');
+        return favorites ? JSON.parse(favorites) : {};
+    }
+
+    // Функция для обновления счетчика избранного
+    function updateFavoriteCounter() {
+        const favorites = loadFavorites();
+        const count = Object.keys(favorites).length;
+        document.getElementById('favoriteCounter').textContent = count;
+    }
+
+    // Обработчики для кнопок избранного
+    document.querySelectorAll('.card-container').forEach(card => {
+        const btn = card.querySelector('.favorite-btn');
+        const title = card.querySelector('.card-info').textContent.replace(/\n/g, ' ').trim();
+        const image = card.querySelector('.image-content').style.backgroundImage;
+        
+        // Проверяем, есть ли товар в избранном
+        const favorites = loadFavorites();
+        if (favorites[title]) {
+            btn.classList.add('active');
+            btn.textContent = 'В избранном';
+        }
+
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            const favorites = loadFavorites();
+            if (this.classList.contains('active')) {
+                // Удаляем из избранного
+                delete favorites[title];
+                this.classList.remove('active');
+                this.textContent = 'Добавить';
+            } else {
+                // Добавляем в избранное
+                favorites[title] = {
+                    title: title,
+                    image: image
+                };
+                this.classList.add('active');
+                this.textContent = 'В избранном';
+            }
+            
+            saveFavorites(favorites);
+            updateFavoriteCounter();
+        });
+        
+        // Клик по карточке - переход на страницу товара
+        card.addEventListener('click', function() {
+            // window.location.href = 'product.html?id=' + encodeURIComponent(title);
+        });
+    });
+
+    // Инициализация счетчика при загрузке страницы
+    document.addEventListener('DOMContentLoaded', updateFavoriteCounter);
+    </script>
+</body>
+</html>

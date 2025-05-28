@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чайная номер один. Чай</title>
+    <link rel="icon" href="5 (1).png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Ruslan+Display&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            font-weight: 100;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .catalog-page {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .catalog-column {
+            width: 16.666%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 80px 10px 20px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+        }
+
+        .product-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-info {
+            opacity: 1;
+        }
+
+        .product-card:hover .product-image {
+            filter: brightness(0.5);
+        }
+
+        .product-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .favorite-btn {
+            background: rgba(233, 229, 199, 0.67);
+            border: none;
+            border-radius: 50px;
+            padding: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 100;
+            font-size: 16px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .favorite-btn:hover, .favorite-btn.active {
+            background: #000;
+            color: #fff;
+        }
+		
+		.favorite-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #000;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        .back-button {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            left: 30px;
+            top: 30px;
+            border: #FFFFFF;
+            background: #000000;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .back-button::before,
+        .back-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #FFF;
+        }
+
+        .back-button::before {
+            transform: rotate(45deg);
+            left: 12px;
+            top: 22px;
+        }
+
+        .back-button::after {
+            transform: rotate(-45deg);
+            left: 12px;
+            top: 22px;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="catalog-page">
+        <div class="back-button" onclick="window.location.href='catalog.html'"></div>
+        <div class="favorites-link" onclick="window.location.href='favorites.html'">
+            <span id="favoriteCounter">0</span>
+        </div>
+        
+        <!-- Колонка 1 - Белый -->
+        <div class="catalog-column column-1">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/60.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Бай Му Дань 2024</h3>
+                        <p class="product-description">1 гр./ 15 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/61.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Белый 2023</h3>
+                        <p class="product-description">1 гр./ 14 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/62.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Ферментированный белый 2022</h3>
+                        <p class="product-description">1 гр./ 25 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/63.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Серебряные иглы 2025</h3>
+                        <p class="product-description">1 гр./ 30 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/64.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Белый 2024</h3>
+                        <p class="product-description">1 гр./ 19 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/65.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Белый резаный 2021</h3>
+                        <p class="product-description">1 гр./ 12 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек по аналогии -->
+        </div>
+        
+        <!-- Колонка 2 - Улун -->
+        <div class="catalog-column column-2">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/51.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шуй Сянь 2023</h3>
+                        <p class="product-description">1 гр./ 15 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/52.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Юй Лань Сан Дань Цун 2023</h3>
+                        <p class="product-description">1гр./ 28 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/53.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Да У Е Дань Цун 2023</h3>
+                        <p class="product-description">1гр./ 25 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/54.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Хуан Чжи Сян Дань Цун 2024</h3>
+                        <p class="product-description">1гр./ 27 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/55.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Лао Ча Ван 2008</h3>
+                        <p class="product-description">1гр./ 14 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/56.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">The GABA 2023</h3>
+                        <p class="product-description">1гр./ 23 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/57.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Лао Цун Шуй Сянь 2023</h3>
+                        <p class="product-description">1гр./ 25 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек по аналогии -->
+        </div>
+		
+        <!-- Колонка 3 - Красный -->
+        <div class="catalog-column column-2">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/70.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Удун Фэнхуан Хун Ча 2024</h3>
+                        <p class="product-description">1 гр./ 22 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/71.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Дянь Хун Мао Фэн 2024</h3>
+                        <p class="product-description">1гр./ 18 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/72.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Хун Ча 2024</h3>
+                        <p class="product-description">1гр./ 10 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/73.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Е Шэн Хун Ча 2022</h3>
+                        <p class="product-description">1гр./ 25 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/74.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шай Хун 2024</h3>
+                        <p class="product-description">1гр./ 16 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/75.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Дянь Хун Сун Чжэнь 2022</h3>
+                        <p class="product-description">1гр./ 16 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/76.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Гу Шу Шай Хун 2024</h3>
+                        <p class="product-description">1гр./ 23 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек по аналогии -->
+        </div>
+		
+		<!-- Колонка 4 - Зелёный -->
+        <div class="catalog-column column-1">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/80.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Зелёные иглы 2025</h3>
+                        <p class="product-description">1гр./ 30 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/81.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Лао Ча Скрученный 2024</h3>
+                        <p class="product-description">1гр./ 13 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/82.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Лао Ча Скрученный 2023</h3>
+                        <p class="product-description">1гр./ 10 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/83.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Зелёный 2025</h3>
+                        <p class="product-description">1гр./ 27 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/84.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Зелёный скрученный 2025</h3>
+                        <p class="product-description">1гр./ 25 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/85.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Лао Ча Нижний лист 2024</h3>
+                        <p class="product-description">1гр./ 13 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек по аналогии -->
+        </div>
+        
+        <!-- Колонка 5 - Шэн -->
+        <div class="catalog-column column-1">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/90.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шэн «Биндао» 2014</h3>
+                        <p class="product-description">1гр./ 12 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/91.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шэн «Цзингу Да Бай Ча» 2020</h3>
+                        <p class="product-description">1гр./ 10 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/92.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шэн Фо Сян «Аромат Будды» 2024</h3>
+                        <p class="product-description">1гр./ 23 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/93.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шэн Тьян Ми 2015</h3>
+                        <p class="product-description">1гр./ 10 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/94.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шэн Пиньгэ 2022</h3>
+                        <p class="product-description">1гр./ 48 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/95.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шэн Цзао Чунь 2018</h3>
+                        <p class="product-description">1гр./ 18 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек по аналогии -->
+        </div>
+        
+		<!-- Колонка 6 - Шу -->
+        <div class="catalog-column column-1">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/100.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шу Суй Юэ Чунь 2018</h3>
+                        <p class="product-description">1гр./ 21 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('images/101.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шу Чунь Сян 2019</h3>
+                        <p class="product-description">1гр./ 16 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/102.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шу «Цзингу Да Бай Ча» 2016</h3>
+                        <p class="product-description">1гр./ 13 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/103.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шу Юэ Сян Ганьтянь 2016</h3>
+                        <p class="product-description">1гр./ 15 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/104.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шу Ча Дао 2020</h3>
+                        <p class="product-description">1гр./ 12 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+			<div class="product-card">
+                <div class="product-image" style="background-image: url('images/105.jpg')"></div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Шу Лао Шу Шу Ча 2012</h3>
+                        <p class="product-description">1гр./ 7 р.</p>
+                    </div>
+                    <button class="favorite-btn">Добавить в избранное</button>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек по аналогии -->
+        </div>
+		
+    </div>
+
+    <script>
+    // Функция для сохранения избранного в LocalStorage
+    function saveFavorites(favorites) {
+        localStorage.setItem('teaFavorites', JSON.stringify(favorites));
+    }
+
+    // Функция для загрузки избранного из LocalStorage
+    function loadFavorites() {
+        const favorites = localStorage.getItem('teaFavorites');
+        return favorites ? JSON.parse(favorites) : {};
+    }
+
+    // Функция для обновления счетчика избранного
+    function updateFavoriteCounter() {
+        const favorites = loadFavorites();
+        const count = Object.keys(favorites).length;
+        document.getElementById('favoriteCounter').textContent = count;
+    }
+
+    // Обработчики для кнопок избранного
+    document.querySelectorAll('.product-card').forEach(card => {
+        const btn = card.querySelector('.favorite-btn');
+        const title = card.querySelector('.product-title').textContent;
+        const description = card.querySelector('.product-description').textContent;
+        const image = card.querySelector('.product-image').style.backgroundImage;
+        
+        // Проверяем, есть ли товар в избранном
+        const favorites = loadFavorites();
+        if (favorites[title]) {
+            btn.classList.add('active');
+            btn.textContent = 'В избранном';
+        }
+
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            const favorites = loadFavorites();
+            if (this.classList.contains('active')) {
+                // Удаляем из избранного
+                delete favorites[title];
+                this.classList.remove('active');
+                this.textContent = 'Добавить в избранное';
+            } else {
+                // Добавляем в избранное
+                favorites[title] = {
+                    title: title,
+                    description: description,
+                    image: image
+                };
+                this.classList.add('active');
+                this.textContent = 'В избранном';
+            }
+            
+            saveFavorites(favorites);
+            updateFavoriteCounter();
+        });
+        
+        // Клик по карточке - переход на страницу товара
+        card.addEventListener('click', function() {
+            // window.location.href = 'product.html?id=' + encodeURIComponent(title);
+        });
+    });
+
+    // Инициализация счетчика при загрузке страницы
+    document.addEventListener('DOMContentLoaded', updateFavoriteCounter);
+	</script>
+</body>
+</html>
